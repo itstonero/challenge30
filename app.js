@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { Sequelizer } = require('./configuration/database');
 
 var app = express();
 
@@ -16,5 +17,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/quotations', require('./routes/quotations'));
+app.use('/slips', require('./routes/slip'));
+app.put('/clear', async(req, res) => {
+    await Sequelizer.sync({ force: true });
+    res.send("OK");
+});
 
 module.exports = app;

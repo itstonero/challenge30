@@ -1,0 +1,41 @@
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item">Advice Amount : {{ adviceAmount }}</li>
+      <li class="list-group-item">Advice Odd: {{ adviceOdd }}</li>
+      <li class="list-group-item">Retries: {{ retries }}</li>
+      <li class="list-group-item">Progress: {{ progress }}</li>
+      <li class="list-group-item">Stage Amount: {{ totalAmount }}</li>
+      <li class="list-group-item">Balance Amount: {{ balanceAmount }}</li>
+      <li class="list-group-item">Bonus Amount: {{ bonusAmount }}</li>
+  </ul>
+  <div class="card-footer">
+    <form method="POST" action="/slips/{{id}}/retry">
+      <button type="submit" class="btn btn-warning">Retry</button> 
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Grow</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<form method="POST" action="/slips/{{id}}/grow">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Grow Slip</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="oddUsed" placeholder="Odd Used" aria-label="oddUsed">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

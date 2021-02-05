@@ -1,0 +1,23 @@
+<table class="table table-dark table-striped">
+    <thead>
+        <th>Use Amount</th>
+        <th>Use Odd</th>
+        <th>Stage Amount</th>
+        <th>Bonus Amount</th>
+        <th>Trials</th>
+        <th>Progress</th>
+    </thead>
+    <tbody>
+        {{#each data}}
+            <tr onclick="openSlip({{this.id}})" style="cursor: pointer;">
+                <td>{{  this.adviceAmount }}</td>
+                <td>{{  this.adviceOdd }}</td>
+                <td>{{  this.totalAmount }}</td>
+                <td>{{  this.bonusAmount }}</td>
+                <td>{{  this.retries }}</td>
+                <td>{{  this.progress }}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./public/javascripts/index.js"></script>

@@ -1,6 +1,8 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize({dialect: 'sqlite', storage: './database.sqlite'});
-
+const config = require('./dbConfig.json');
+//const sequelize = new Sequelize({dialect: 'sqlite', storage: './database.sqlite', logging: false});
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
+//logging: process.env.NODE_ENV === 'production' ? false : console.log
 class Quotation extends Model{}
 class Slip extends Model{}
 

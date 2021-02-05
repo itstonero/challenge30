@@ -1,0 +1,65 @@
+<table class="table table-dark table-striped">
+    <thead>
+        <th>Init Odd</th>
+        <th>Retry Odd</th>
+        <th>Grow Odd</th>
+        <th>Given Odd</th>
+        <th>Trials</th>
+        <th>Target</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6">
+                <button type="button" class="btn btn-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal"> Add New Quotation </button>
+            </td>
+        </tr>
+        {{#each data}}
+            <tr onclick="openQuotation({{this.id}})" style="cursor: pointer;">
+                <td>{{  this.initOdd }}</td>
+                <td>{{  this.retryOdd }}</td>
+                <td>{{  this.growOdd }}</td>
+                <td>{{  this.odd }}</td>
+                <td>{{  this.trial }}</td>
+                <td>{{  this.target }}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div>
+</div>
+
+
+<!-- Modal -->
+<form method="POST" action="/quotations">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Quotation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <input type="hidden" value="{{id}}" name="quotationId" />
+            <div class="input-group mb-3">
+                <span class="input-group-text">ODD</span>
+                <input type="text" class="form-control" name="odd" aria-label="ODD TO Slip With">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">TRIAL</span>
+                <input type="text" class="form-control" name="trial" aria-label="Limit to Retries">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">TARGET</span>
+                <input type="text" class="form-control" name="target" aria-label="Target Odd For Iteration">
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+<script src="./public/javascripts/index.js"></script>

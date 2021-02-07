@@ -3,5 +3,5 @@
     "password" : "dH8*lN9*",
     "host" : "sql2.freesqldatabase.com",
     "database" : "sql2390944",
-    "dialect" :"mysql"
+    "dialect" : "mysql"
 }

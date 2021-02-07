@@ -1,10 +1,11 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const config = require('./dbConfig.json');
-//const sequelize = new Sequelize({dialect: 'sqlite', storage: './database.sqlite', logging: false});
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+//const sequelize = new Sequelize({dialect: 'sqlite', storage: './database.sqlite'});
+const sequelize = new Sequelize(config.database, config.username, config.password, {...config, logging: console.log});
 //logging: process.env.NODE_ENV === 'production' ? false : console.log
 class Quotation extends Model{}
 class Slip extends Model{}
+class Fixture extends Model {}
 
 Quotation.init(
 {
@@ -57,8 +58,39 @@ Slip.init({
     }
 }, { sequelize });
 
+Fixture.init({
+    game:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    league:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    suggestion:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },    
+    period:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    country:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    time:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    fixtureId:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
+}, {  sequelize });
+
 Quotation.hasMany(Slip, { foreignKey : "quotationId" });
 Slip.belongsTo(Quotation, { foreignKey: 'quotationId'});
 
 
-module.exports = { Quotation, Slip, Sequelizer : sequelize }
+module.exports = { Quotation, Slip, Fixture, Sequelizer : sequelize }

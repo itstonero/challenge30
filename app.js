@@ -23,6 +23,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/quotations', require('./routes/quotations'));
 app.use('/slips', require('./routes/slip'));
+app.use('/fixtures', require('./routes/fixtures'));
 app.put('/clear', async(req, res) => {
     await Sequelizer.sync({ force: true });
     res.send("OK");

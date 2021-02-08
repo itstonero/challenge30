@@ -5,10 +5,16 @@ const { GetHeaders, ShowTodayFixtures, ShowSelectedFixture, ParseFormRequest } =
 
 router.get('/', async (req, res)  =>
 {
-    try{
+    try
+    {
+        var X = new Date();
+        var year = req.params.year ? req.params.year : X.getFullYear();
+        var month = req.params.month ? req.params.month : X.getMonth().toString();
+        var day = req.params.day ? req.params.day : X.getDate().toString();
+
         var apiCall = unirest("GET", "https://api-football-beta.p.rapidapi.com/fixtures");
         apiCall.headers(GetHeaders());
-        apiCall.query({"date": `${req.query.year}-${req.query.month}-${req.query.day}`});
+        apiCall.query({"date": `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`});
         apiCall.end(response => {
             const today = ShowTodayFixtures(response);
             console.log(today);
@@ -84,4 +90,5 @@ module.exports = router;
  * GRE => 
  * Transcript =>
  * Recommendation Letter => 
+ * 
  */

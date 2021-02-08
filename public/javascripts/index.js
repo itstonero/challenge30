@@ -40,8 +40,17 @@ const insertFixtures = (canTrim) =>
 {
     const form = document.createElement('form');
     form.method = 'post';
-    form.action = canTrim ? '/fixtures/trim' : '/fixtures';
-  
+    form.action = '/fixtures';
+    
+    if(canTrim)
+    {
+        const flagTrim = document.createElement('input');
+        flagTrim.type = 'hidden';
+        flagTrim.name = 'canTrim';
+        flagTrim.value = 'canTrim';
+        form.appendChild(flagTrim);
+    }
+
     Object.values(allFixture).forEach(item => {
         const hiddenField = document.createElement('input');
         hiddenField.type = 'hidden';

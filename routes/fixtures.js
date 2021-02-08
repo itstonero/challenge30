@@ -12,13 +12,12 @@ router.get('/', async (req, res)  =>
         var month = req.params.month ? req.params.month : X.getMonth().toString();
         var day = req.params.day ? req.params.day : X.getDate().toString();
         console.log(`Check For :: ${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
-        
+
         var apiCall = unirest("GET", "https://api-football-beta.p.rapidapi.com/fixtures");
         apiCall.headers(GetHeaders());
         apiCall.query({"date": `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`});
         apiCall.end(response => {
             const today = ShowTodayFixtures(response);
-            console.log(today);
             res.render('allFixtures', { today })
         })
     }catch

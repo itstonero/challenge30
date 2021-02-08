@@ -9,7 +9,7 @@ router.get('/', async (req, res)  =>
     {
         var X = new Date();
         var year = req.params.year ? req.params.year : X.getFullYear();
-        var month = req.params.month ? req.params.month : X.getMonth().toString();
+        var month = req.params.month ? req.params.month : (X.getMonth() +1).toString();
         var day = req.params.day ? req.params.day : X.getDate().toString();
         console.log(`Check For :: ${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
 

@@ -20,12 +20,14 @@ router.get('/', async (req, res)  =>
     }
 });
 
-router.get('/today', async(req, res) => {
+router.get('/today', async(req, res) => 
+{
     try 
     {
-        await Fixture.sync({ force: false })
-        // const allFixtures = await Fixture.findAll();
-        // const registeredFixtures = allFixtures.map(data => data.toJSON());
+        await Fixture.sync({ force: false });
+        const allFixtures = (await Fixture.findAll()).map(x => x.toJSON());
+        res.render('todayFixtures', { today: ShowSelectedFixture(allFixtures)});
+
         // var X = new Date();
 
         // var apiCall = unirest("GET", "https://api-football-beta.p.rapidapi.com/odds");
@@ -37,10 +39,10 @@ router.get('/today', async(req, res) => {
         // apiCall.end(response => {
         //     res.render('todayFixtures', { data: ShowSelectedFixture(response, registeredFixtures)})
         // });
-        res.render('todayFixtures', { data: ShowSelectedFixture(response, registeredFixtures)})
 
     } catch (error) 
     {
+        console.log("An error Occured :: " + JSON.stringify(error))
         res.json(error);
     }   
 });
@@ -49,8 +51,7 @@ router.post('/today', async(req, res) => {
     try 
     {
         await Fixture.update(req.body, { where : { fixtureId : req.body.fixtureId}});
-        const allFixtures = await Fixture.findAll();
-        res.render('todayFixtures', { data: ShowSelectedFixture(null, allFixtures.map(x => x.toJSON()))})
+        res.redirect('/fixtures/today')
     } catch (error) 
     {
         res.json(error);
@@ -61,7 +62,13 @@ router.post('/', async(req, res) =>
 {
     try 
     {
-        await Fixture.sync({ force: false });
+        console.log(req.body);
+        await Fixture.sync({ force: !!req.body.canTrim });
+        if(req.body.hasOwnProperty("canTrim"))
+        {
+            delete req.body.canTrim;
+        }
+        console.log(req.body);
         await Fixture.bulkCreate(ParseFormRequest(req.body));
         res.redirect('/fixtures/today');
     } catch(err)
@@ -70,16 +77,11 @@ router.post('/', async(req, res) =>
     }
 });
 
-router.post('/trim', async(req, res) =>{
-    try 
-    {
-        await Fixture.sync({ force: true });
-        await Fixture.bulkCreate(ParseFormRequest(req.body));
-        res.redirect('/fixtures/today');
-    } catch(err)
-    {
-        res.json(err)
-    }
-})
-
 module.exports = router;
+
+/**
+ * SOP => Statement of Purpose
+ * GRE => 
+ * Transcript =>
+ * Recommendation Letter => 
+ */

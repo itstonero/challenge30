@@ -5,28 +5,20 @@
         <th>Start Time</th>
         <th>Suggested</th>
         <th>Played Duration</th>
-        <th>Odds</th>
     </thead>
     <tbody>
-        {{#each data}}
+        {{#each today}}
             <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <td>{{  this.fixtureId  }}</td>
                 <td>{{  this.game }}</td>
                 <td>{{  this.time }}</td>
                 <td>{{  this.suggestion }}</td>
                 <td>{{  this.period }}</td>
-                <td>
-                    {{#each data.bets}}
-                        {{ this.name }}
-                    {{/each}}
-                </td>
             </tr>
         {{/each}}
     </tbody>
 </table>
 
-
-<form method="POST" action="/fixtures/today">
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -34,21 +26,22 @@
         <h5 class="modal-title" id="exampleModalLabel">Add Suggestion</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Suggestion</span>
-                <input type="text" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">Game ID</span>
-                <input type="text" class="form-control" name="fixtureId" aria-label="Fixture">
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Confirm</button>
-      </div>
+        <form method="POST" action="/fixtures/today">
+          <div class="modal-body">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Suggestion</span>
+                    <input type="text" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Game ID</span>
+                    <input type="text" class="form-control" name="fixtureId" aria-label="Fixture">
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>
     </div>
   </div>
 </div>
-</form>

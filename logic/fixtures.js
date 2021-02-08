@@ -35,70 +35,70 @@ const ShowTodayFixtures = (rawData) => {
 }
 
 const GetGameTime = (gameTime) => {
-    let currentTime = Date.now(), gameStart = new Date();
+    let currentTime = new Date(), gameStart = new Date();
     gameStart.setHours(gameTime.split(":")[0] * 1);
     gameStart.setMinutes(gameTime.split(":")[1] * 1);
+    const minuteDiff = ((currentTime.getHours() * 60) + currentTime.getMinutes()) - ((gameStart.getHours() * 60) + gameStart.getMinutes());
 
-    if(currentTime > gameStart)
+    if(gameStart > currentTime)
     {
-        return `N/A`;
+        return 'Not Started';
     }
 
-    const differenceInMilliSeconds = gameStart - currentTime;
-    let differenceInMinutes = Math.round(((differenceInMilliSeconds % 86400000) % 3600000) / 60000);
-
-    if(differenceInMinutes <= 46)
+    if(minuteDiff >= 120)
     {
-        return `${differenceInMinutes}'`;
+        return 'FT';
     }
 
-    differenceInMinutes -= 60;
+    if(minuteDiff <= 46)
+    {
+        return `${minuteDiff}'`
+    }
 
-    if(differenceInMinutes <= 0)
+    if(minuteDiff <= 62)
     {
         return `HT`;
     }
 
-    if(differenceInMinutes <= 46)
-    {
-        return `${differenceInMinutes + 45}'`
-    }
-
-    return `FT`;
-
+    return `${minuteDiff - 16}'`;
 }
 
-const ShowSelectedFixture = (fixture, todayFixtures) => {
+const ShowSelectedFixture = (todayFixtures) => {
 
-    const fixtureIDs = todayFixtures.map(x => x.fixtureId);
-    const allFixtures = todayFixtures.reduce((reducer, item) =>({...reducer, [item.fixtureId]: {...item, period: GetGameTime(item.time), bets: []}}), {});
-
-    console.log(allFixtures);
-
-    if(!fixture || !fixture.response)
-    {
-        return todayFixtures;
-    }
-
-    const registeredMatches = fixture.response.filter(data => fixtureIDs.includes(data.fixture.id))
-    console.log(registeredMatches);
-
-
-    for(var odds of registeredMatches)
-    {
-        const booker = odds.bookmakers[0].bets;
-        console.log(booker);
-        const fixtureId = odds.fixture.id;
-
-        for(var bets of booker)
-        {
-            allFixtures[fixtureId].bets = bets;
+    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time)}));
+    return todaysFiltered;
+    /**
+     * 
+     const fixtureIDs = todayFixtures.map(x => x.fixtureId);
+     const allFixtures = todayFixtures.reduce((reducer, item) =>({...reducer, [item.fixtureId]: {...item, period: GetGameTime(item.time), bets: []}}), {});
+     
+     console.log(allFixtures);
+     
+     if(!fixture || !fixture.response)
+     {
+         return todayFixtures;
         }
+        
+        const registeredMatches = fixture.response.filter(data => fixtureIDs.includes(data.fixture.id))
+        console.log(registeredMatches);
+        
+        
+        for(var odds of registeredMatches)
+        {
+            const booker = odds.bookmakers[0].bets;
+            console.log(booker);
+            const fixtureId = odds.fixture.id;
+            
+            for(var bets of booker)
+            {
+                allFixtures[fixtureId].bets = bets;
+            }
+        }
+        
+        return Object.values(allFixtures);
+        */
     }
-
-    return Object.values(allFixtures);
-}
-
+    
 const ParseFormRequest = (request) =>
 {
     const jsonRequest = Object.values(request).map(data => JSON.parse(data));

@@ -1,6 +1,5 @@
 <table class="table table-dark table-striped">
     <thead>
-        <th>Game ID</th>
         <th>Match</th>
         <th>Start Time</th>
         <th>Suggested</th>
@@ -8,8 +7,7 @@
     </thead>
     <tbody>
         {{#each today}}
-            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <td>{{  this.fixtureId  }}</td>
+            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="suggestFixture({{this.fixtureId}})">
                 <td>{{  this.game }}</td>
                 <td>{{  this.time }}</td>
                 <td>{{  this.suggestion }}</td>
@@ -34,7 +32,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Game ID</span>
-                    <input type="text" class="form-control" name="fixtureId" aria-label="Fixture">
+                    <input type="text" class="form-control" name="fixtureId" aria-label="Fixture" id="fixtureId">
                 </div>
           </div>
           <div class="modal-footer">

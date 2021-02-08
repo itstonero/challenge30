@@ -54,3 +54,10 @@ const insertFixtures = (canTrim) =>
     form.submit();
 }
   
+const suggestFixture = (fixtureId) =>
+{
+    console.log(fixtureId);
+    const matchId = document.getElementById("fixtureId");
+    console.log(matchId);
+    matchId.value = `${fixtureId}`;
+}

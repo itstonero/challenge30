@@ -1,6 +1,6 @@
 const GetHeaders = () =>{
     return ({
-        "x-rapidapi-key": "f098c9e184msh29e07e5668d67e8p156055jsn2f3273f88101",
+        "x-rapidapi-key": "944b51b49dmsh339c99f0345fdd2p13db62jsned6a3c13eab9",
         "x-rapidapi-host": "api-football-beta.p.rapidapi.com",
         "useQueryString": true
     });

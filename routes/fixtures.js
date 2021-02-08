@@ -69,8 +69,9 @@ router.post('/', async(req, res) =>
     try 
     {
         console.log(req.body);
-        await Fixture.sync({ force: !!req.body.canTrim });
-        if(req.body.hasOwnProperty("canTrim"))
+        const force = !!req.body.canTrim;
+        await Fixture.sync({ force });
+        if(force)
         {
             delete req.body.canTrim;
         }
@@ -79,6 +80,7 @@ router.post('/', async(req, res) =>
         res.redirect('/fixtures/today');
     } catch(err)
     {
+        console.log(err);
         res.json(err)
     }
 });

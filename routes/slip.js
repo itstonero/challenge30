@@ -63,9 +63,9 @@ router.post('/:slipId/retry', async (req, res) =>
 
     const slip = givenSlip.toJSON();
     const retryIndex = ++slip.retryIndex;
-
     if(retryIndex < slip.Quotation.trial)
     {
+        slip.usedOdd = 1;
         return Slip.update({retryIndex}, { where : { id : req.params.slipId}})
         .then(data => res.redirect(`/slips/${req.params.slipId}`))
         .catch(err => res.status(404).json(err));

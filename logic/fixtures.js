@@ -7,8 +7,8 @@ const GetHeaders = () =>{
 }
 
 const FormatTime = (date) => {
-    let gameTime = new Date(date);
-    return `${gameTime.getHours().toString().padStart(2, "0")}:${gameTime.getMinutes().toString().padStart(2, "0")}`;
+    let gameTime = (new Date(date)).toTimeString().split(' ');
+    return `${gameTime[0]} ${gameTime[1]}`
 }
 
 const ShowTodayFixtures = (rawData) => {
@@ -25,7 +25,7 @@ const ShowTodayFixtures = (rawData) => {
             game: `${fixture.teams.home.name} vs ${fixture.teams.away.name}`,
             league: fixture.league.name,
             country: fixture.league.country,
-            time: FormatTime(fixture.fixture.date),
+            time: fixture.fixture.date,
             fixtureId: fixture.fixture.id
         }
         response.push({...newFixture, raw: JSON.stringify(newFixture)})
@@ -35,9 +35,12 @@ const ShowTodayFixtures = (rawData) => {
 }
 
 const GetGameTime = (gameTime) => {
-    let currentTime = new Date(), gameStart = new Date();
-    gameStart.setHours(gameTime.split(":")[0] * 1);
-    gameStart.setMinutes(gameTime.split(":")[1] * 1);
+    let currentTime = new Date(), gameStart = new Date(gameTime);
+    let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);
+
+    let gameHours = gameStart.getHours() + (timeZoneDiff * -1);
+    gameStart.setHours(gameHours);
+
     const minuteDiff = ((currentTime.getHours() * 60) + currentTime.getMinutes()) - ((gameStart.getHours() * 60) + gameStart.getMinutes());
 
     if(gameStart > currentTime)
@@ -65,7 +68,7 @@ const GetGameTime = (gameTime) => {
 
 const ShowSelectedFixture = (todayFixtures) => {
 
-    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time)}));
+    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: FormatTime(x.time)}));
     return todaysFiltered;
     /**
      * 

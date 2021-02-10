@@ -3,7 +3,9 @@
         <th>Match</th>
         <th>Start Time</th>
         <th>Suggested</th>
+        <th>Advice Odd</th>
         <th>Played Duration</th>
+
     </thead>
     <tbody>
         {{#each today}}
@@ -11,6 +13,7 @@
                 <td>{{  this.game }}</td>
                 <td>{{  this.time }}</td>
                 <td>{{  this.suggestion }}</td>
+                <td>{{  this.adviceOdd  }}</td>
                 <td>{{  this.period }}</td>
             </tr>
         {{/each}}
@@ -29,6 +32,10 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Suggestion</span>
                     <input type="text" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Advice</span>
+                    <input type="text" class="form-control" name="adviceOdd" aria-label="Add Advice Odd to Fixture">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Game ID</span>

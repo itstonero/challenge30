@@ -67,6 +67,10 @@ Fixture.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    adviceOdd:{
+        type: DataTypes.DOUBLE,
+        allowNull: true
+    },
     suggestion:{
         type: DataTypes.STRING,
         allowNull: true

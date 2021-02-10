@@ -1,23 +1,17 @@
 <table class="table table-dark table-striped">
     <thead>
-        <th>ID</th>
-        <th>Init Odd</th>
-        <th>Retry Odd</th>
-        <th>Grow Odd</th>
-        <th>Given Odd</th>
-        <th>Trials</th>
+        <th>Total Amount</th>
+        <th>Bonus Amount</th>
+        <th>Trial</th>
         <th>Target</th>
     </thead>
     <tbody>
         {{#each data}}
-            <tr onclick="openQuotation({{this.id}})" style="cursor: pointer;">
-                <td>{{  this.id }}</td>
-                <td>{{  this.initOdd }}</td>
-                <td>{{  this.retryOdd }}</td>
-                <td>{{  this.growOdd }}</td>
-                <td>{{  this.odd }}</td>
-                <td>{{  this.trial }}</td>
-                <td>{{  this.target }}</td>
+            <tr onclick="openSlip({{this.id}})" style="cursor: pointer;">
+                <td>{{  this.totalAmount }}</td>
+                <td>{{  this.bonusAmount }}</td>
+                <td>{{  this.retries }}</td>
+                <td>{{  this.progress }}</td>
             </tr>
         {{/each}}
     </tbody>

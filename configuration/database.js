@@ -1,7 +1,7 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const config = require('./dbConfig.json');
 //const sequelize = new Sequelize({dialect: 'sqlite', storage: './database.sqlite'});
-const sequelize = new Sequelize(config.database, config.username, config.password, {...config/*, logging: console.log*/});
+const sequelize = new Sequelize(config.database, config.username, config.password, {...config, logging: console.log});
 //logging: process.env.NODE_ENV === 'production' ? false : console.log
 class Quotation extends Model{}
 class Slip extends Model{}
@@ -68,7 +68,7 @@ Fixture.init({
         allowNull: false
     },
     adviceOdd:{
-        type: DataTypes.DOUBLE,
+        type: DataTypes.STRING,
         allowNull: true
     },
     suggestion:{

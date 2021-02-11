@@ -10,9 +10,38 @@ const openSlip = (id) =>
     window.location = `/slips/${id}`;
 }
 
+const finalize = (form) => 
+{
+    console.log(form)
+}
+
 const retrySlip = (id) =>
 {
-    window.location = `/slips/${id}/retry`
+    if(confirm("Want to Make a Retry?"))
+    {
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = `/slips/${id}/retry`;
+        form.submit();
+        console.log(form)
+    }
+
+    console.log(`cancelled`)
+}
+
+
+const withdrawBonus = (id) => {
+    if(confirm("Want To Withdraw Bonus ?"))
+    {
+        //fetch()
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = `/slips/${id}/clearBonus`;
+        form.submit();
+        console.log(form)
+    }
+
+    console.log(`cancelled`)
 }
 
 const addFixture = (fixture) => 

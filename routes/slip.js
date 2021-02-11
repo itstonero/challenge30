@@ -106,4 +106,9 @@ router.post('/:slipId/grow', async(req, res) =>
   .catch(err => res.status(404).json(err));
 })
 
+router.post('/:slipId/clearBonus', async(req, res) => {
+    await Slip.update( { bonusAmount : 0}, { where : { id : req.params.slipId}});
+    res.redirect(`/slips/${req.params.slipId}`)
+});
+
 module.exports = router;

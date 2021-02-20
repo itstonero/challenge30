@@ -18,6 +18,11 @@ function urlBase64ToUint8Array(base64String)
 const registerPushNotification = async(id) => {
     let register = await navigator.serviceWorker.register('/public/javascripts/worker.js');
     
+    if(!register)
+    {
+        register = await navigator.serviceWorker.register('/worker.js');
+    }
+
     const sub = await register.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array("BE1g9tsffcKB4aFW1Fd6-De1Ow7HkXSkfZk3SjstZrxTkWA2aZAgWu8SnIpX0XqHvV7puEmnUFO5ygkwu_RZT0c")

@@ -125,7 +125,7 @@ const ParseFormRequest = (request) =>
 }
 
 
-module.exports = { GetHeaders, ShowTodayFixtures, ShowSelectedFixture, ParseFormRequest };
+module.exports = { GetHeaders, ShowTodayFixtures, ShowSelectedFixture, ParseFormRequest, FormatTime };
 
 // let fix = [{time:'21:54:00 GMT+0000', name: 'Four'}, {time:'17:54:00 GMT+0000', name: 'one'}, {time:'18:00:00 GMT+0000', name: 'Two'}, {time:'18:10:00 GMT+0000', name: 'Three'}]
 // fix.sort(sortByDate)

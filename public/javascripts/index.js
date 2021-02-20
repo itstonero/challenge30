@@ -1,3 +1,43 @@
+
+function urlBase64ToUint8Array(base64String) 
+{
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+const registerPushNotification = async(id) => {
+    let register = await navigator.serviceWorker.register('/public/javascripts/worker.js');
+    
+    const sub = await register.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array("BE1g9tsffcKB4aFW1Fd6-De1Ow7HkXSkfZk3SjstZrxTkWA2aZAgWu8SnIpX0XqHvV7puEmnUFO5ygkwu_RZT0c")
+    });
+
+    await fetch(`/subscription/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(sub),
+        headers : { 'content-type' : 'application/json'}
+    });
+
+}
+
+const pushSlip = () => {
+    registerPushNotification(document.getElementById("fixtureId").value);
+}
+
+
+
+
 const allFixture = {};
 
 const openQuotation = (id) => 
@@ -94,8 +134,6 @@ const insertFixtures = (canTrim) =>
   
 const suggestFixture = (fixtureId) =>
 {
-    console.log(fixtureId);
     const matchId = document.getElementById("fixtureId");
-    console.log(matchId);
     matchId.value = `${fixtureId}`;
 }

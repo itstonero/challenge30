@@ -7,6 +7,7 @@ const exphbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 const { Sequelizer } = require('./configuration/database');
 
 var app = express();
@@ -26,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/quotations', require('./routes/quotations'));
 app.use('/slips', require('./routes/slip'));
+app.use('/subscription', require('./routes/subscription'));
 app.use('/fixtures', require('./routes/fixtures'));
 app.put('/clear', async(req, res) => {
     await Sequelizer.sync({ force: true });

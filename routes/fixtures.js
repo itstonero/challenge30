@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var unirest = require('unirest');
-const { Fixture, Quotation } = require('../configuration/database');
+const { Fixture } = require('../configuration/database');
 const { GetHeaders, ShowTodayFixtures, ShowSelectedFixture, ParseFormRequest } = require('../logic/fixtures');
 
 router.get('/', async (req, res)  =>

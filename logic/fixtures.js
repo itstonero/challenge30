@@ -11,6 +11,18 @@ const FormatTime = (date) => {
     return `${gameTime[0]} ${gameTime[1]}`
 }
 
+const totalTime = (fixture) => {
+    let time = fixture.time.split(':');
+    let totalMinutes = ((time[0] * 1) * 60) + (time[1] * 1);
+    return totalMinutes;
+}
+
+const sortByDate = (elementOne, elementTwo) =>
+{
+    let result =  totalTime(elementOne) - totalTime(elementTwo);
+    return result;
+}
+
 const ShowTodayFixtures = (rawData) => {
     const response = [];
     //console.log(rawData);
@@ -69,6 +81,7 @@ const GetGameTime = (gameTime) => {
 const ShowSelectedFixture = (todayFixtures) => {
 
     const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: FormatTime(x.time)}));
+    todaysFiltered.sort(sortByDate);
     return todaysFiltered;
     /**
      * 
@@ -102,6 +115,9 @@ const ShowSelectedFixture = (todayFixtures) => {
         */
     }
     
+
+
+
 const ParseFormRequest = (request) =>
 {
     const jsonRequest = Object.values(request).map(data => JSON.parse(data));
@@ -111,5 +127,7 @@ const ParseFormRequest = (request) =>
 
 module.exports = { GetHeaders, ShowTodayFixtures, ShowSelectedFixture, ParseFormRequest };
 
-
+// let fix = [{time:'21:54:00 GMT+0000', name: 'Four'}, {time:'17:54:00 GMT+0000', name: 'one'}, {time:'18:00:00 GMT+0000', name: 'Two'}, {time:'18:10:00 GMT+0000', name: 'Three'}]
+// fix.sort(sortByDate)
+// console.log(fix)
 //console.log(ShowTodayFixtures(rawDatas));

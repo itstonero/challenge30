@@ -35,6 +35,11 @@ const pushSlip = () => {
     registerPushNotification(document.getElementById("fixtureId").value);
 }
 
+if('serviceWorker' in navigator)
+{
+    console.log("Service Worker Allowed")
+    registerPushNotification('1')
+}
 
 
 

@@ -30,7 +30,7 @@ router.get('/today', async(req, res) =>
 {
     try 
     {
-        await Fixture.sync({ force: false });
+        //await Fixture.sync({ force: true });
         const allFixtures = (await Fixture.findAll()).map(x => x.toJSON());
         res.render('todayFixtures', { today: ShowSelectedFixture(allFixtures)});
 
@@ -57,8 +57,7 @@ router.post('/today', async(req, res) => {
     try 
     {
         const toBeUpdated = {...req.body, alarmSet: true};
-        await Fixture.sync({force: false});
-        await Fixture.update(toBeUpdated, { where : { fixtureId : req.body.fixtureId}});
+        await Fixture.update(toBeUpdated, { where : { fixtureId : toBeUpdated.fixtureId}});
         res.redirect(`/subscription/${toBeUpdated.fixtureId}`)
     } catch (error) 
     {

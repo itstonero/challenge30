@@ -87,6 +87,11 @@ Fixture.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    alarmSet:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     fixtureId:{
         type: DataTypes.INTEGER,
         allowNull: false

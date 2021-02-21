@@ -15,8 +15,9 @@ function urlBase64ToUint8Array(base64String)
     return outputArray;
 }
 
+let register = null;
+
 const registerPushNotification = async(id) => {
-    let register = await navigator.serviceWorker.register('/public/javascripts/worker.js');
     
     if(register)
     {
@@ -41,12 +42,26 @@ const pushSlip = () => {
     registerPushNotification(document.getElementById("fixtureId").value);
 }
 
-let toggleServiceWorker = true;
-if(toggleServiceWorker || 'serviceWorker' in navigator)
+if(!register && 'serviceWorker' in navigator)
 {
-    console.log("Service Worker Allowed")
-    registerPushNotification('1')
-    toggleServiceWorker = !toggleServiceWorker;
+    setTimeout(async() => {
+        register = await navigator.serviceWorker.register('/public/javascripts/worker.js');
+        registerPushNotification('1');
+    }, 1000);
+
+    setTimeout(async() => {
+        if(!register){
+            register = await navigator.serviceWorker.register('/javascripts/worker.js');
+            registerPushNotification('1');
+        }
+    }, 2000);
+
+    setTimeout(async() => {
+        if(!register){
+            register = await navigator.serviceWorker.register('/worker.js');
+            registerPushNotification('1');
+        }
+    }, 4000);
 }
 
 

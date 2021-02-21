@@ -44,6 +44,7 @@ const pushSlip = () => {
 
 if(!register && 'serviceWorker' in navigator)
 {
+    console.log("Service Worker Loading...")
     setTimeout(async() => {
         register = await navigator.serviceWorker.register('/public/worker.js');
         console.log("Trying /public/worker.js");
@@ -82,6 +83,8 @@ if(!register && 'serviceWorker' in navigator)
     //         registerPushNotification('1');
     //     }
     // }, 4000);
+}else{
+    console.log("No Service Worker Allowed");
 }
 
 

@@ -58,7 +58,7 @@ router.post('/today', async(req, res) => {
     {
         const toBeUpdated = {...req.body, alarmSet: true};
         await Fixture.update(toBeUpdated, { where : { fixtureId : toBeUpdated.fixtureId}});
-        res.redirect(`/subscription/${toBeUpdated.fixtureId}`)
+        res.redirect(`/fixtures/today`)
     } catch (error) 
     {
         res.json(error);

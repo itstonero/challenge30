@@ -15,11 +15,16 @@ router.post('/:fixtureId', async(req, res) =>
 {
     const pushSubscription = req.body;
 
-    let fixture = await Fixture.findOne({ where: { fixtureId : req.params.fixtureId }});
-    fixture = fixture.toJSON();
+    setTimeout(async () => {
+        let fixture = await Fixture.findOne({ where: { fixtureId : req.params.fixtureId }});
+        if(fixture)
+        {
+            fixture = fixture.toJSON();
 
-    webPush.sendNotification(pushSubscription, JSON.stringify({ title : fixture.game, body: `${fixture.suggestion}   ${FormatTime(fixture.time)}`}));
-    return res.redirect('/fixtures/today');
+            webPush.sendNotification(pushSubscription, JSON.stringify({ title : fixture.game, body: `${fixture.suggestion}   ${FormatTime(fixture.time)}`}));
+            return res.redirect('/fixtures/today');
+        }
+    }, 2000);
 });
 
 

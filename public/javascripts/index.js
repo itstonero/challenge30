@@ -41,10 +41,12 @@ const pushSlip = () => {
     registerPushNotification(document.getElementById("fixtureId").value);
 }
 
-if('serviceWorker' in navigator)
+let toggleServiceWorker = true;
+if(toggleServiceWorker || 'serviceWorker' in navigator)
 {
     console.log("Service Worker Allowed")
     registerPushNotification('1')
+    toggleServiceWorker = !toggleServiceWorker;
 }
 
 

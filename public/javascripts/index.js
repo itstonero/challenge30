@@ -47,78 +47,14 @@ if(!register && 'serviceWorker' in navigator)
     console.log("Service Worker Loading...")
     setTimeout(async() => {
         register = await navigator.serviceWorker.register('/public/worker.js');
-        console.log("Trying /public/worker.js");
-        console.log(register);
-        registerPushNotification('1');
     }, 1000);
-
-    setTimeout(async() => {
-        register = await navigator.serviceWorker.register('./public/worker.js');
-        console.log("Trying ./public/worker.js");
-        console.log(register);
-        registerPushNotification('1');
-    }, 1000);
-
-    setTimeout(async() => {
-        if(!register){
-            register = await navigator.serviceWorker.register('./worker.js');
-            console.log("Trying ./worker.js");
-            console.log(register)
-            registerPushNotification('1');
-        }
-    }, 2000);
-
-    setTimeout(async() => {
-        if(!register){
-            register = await navigator.serviceWorker.register('/worker.js');
-            console.log("Trying /worker.js");
-            console.log(register)
-            registerPushNotification('1');
-        }
-    }, 2000);
-
-    // setTimeout(async() => {
-    //     if(!register){
-    //         register = await navigator.serviceWorker.register('/worker.js');
-    //         registerPushNotification('1');
-    //     }
-    // }, 4000);
 }else{
     console.log("No Service Worker Allowed");
     Notification.requestPermission(data => {
         console.log(`Service Worker is ${data}`);
         setTimeout(async() => {
             register = await navigator.serviceWorker.register('/public/worker.js');
-            console.log("Trying /public/worker.js");
-            console.log(register);
-            registerPushNotification('1');
-        }, 1000);
-    
-        setTimeout(async() => {
-            register = await navigator.serviceWorker.register('./public/worker.js');
-            console.log("Trying ./public/worker.js");
-            console.log(register);
-            registerPushNotification('1');
-        }, 1000);
-    
-        setTimeout(async() => {
-            if(!register){
-                register = await navigator.serviceWorker.register('./worker.js');
-                console.log("Trying ./worker.js");
-                console.log(register)
-                registerPushNotification('1');
-            }
-        }, 2000);
-    
-        setTimeout(async() => {
-            if(!register){
-                register = await navigator.serviceWorker.register('/worker.js');
-                console.log("Trying /worker.js");
-                console.log(register)
-                registerPushNotification('1');
-            }
-        }, 2000);
-    
+        }, 1000);    
     });
 }
 

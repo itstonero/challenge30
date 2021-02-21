@@ -45,13 +45,24 @@ const pushSlip = () => {
 if(!register && 'serviceWorker' in navigator)
 {
     setTimeout(async() => {
-        register = await navigator.serviceWorker.register('/public/javascripts/worker.js');
+        register = await navigator.serviceWorker.register('/public/worker.js');
+        console.log("Trying /public/worker.js");
+        console.log(register);
+        registerPushNotification('1');
+    }, 1000);
+
+    setTimeout(async() => {
+        register = await navigator.serviceWorker.register('./public/worker.js');
+        console.log("Trying ./public/worker.js");
+        console.log(register);
         registerPushNotification('1');
     }, 1000);
 
     setTimeout(async() => {
         if(!register){
-            register = await navigator.serviceWorker.register('/javascripts/worker.js');
+            register = await navigator.serviceWorker.register('./worker.js');
+            console.log("Trying ./worker.js");
+            console.log(register)
             registerPushNotification('1');
         }
     }, 2000);
@@ -59,9 +70,18 @@ if(!register && 'serviceWorker' in navigator)
     setTimeout(async() => {
         if(!register){
             register = await navigator.serviceWorker.register('/worker.js');
+            console.log("Trying /worker.js");
+            console.log(register)
             registerPushNotification('1');
         }
-    }, 4000);
+    }, 2000);
+
+    // setTimeout(async() => {
+    //     if(!register){
+    //         register = await navigator.serviceWorker.register('/worker.js');
+    //         registerPushNotification('1');
+    //     }
+    // }, 4000);
 }
 
 

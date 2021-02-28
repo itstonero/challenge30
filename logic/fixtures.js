@@ -40,12 +40,12 @@ const ShowTodayFixtures = (rawData) => {
 
 const GetGameTime = (gameTime) => {
     let currentTime = new Date(), gameStart = new Date(gameTime);
-    // let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);
+    let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);
 
-    gameStart = new Date(gameStart.toLocaleString('en-NG'));
+ //   gameStart = new Date(gameStart.toLocaleString('en-NG'));
 
-    // let gameHours = gameStart.getHours() + (timeZoneDiff * -1);
-    // gameStart.setHours(gameHours);
+    let gameHours = gameStart.getHours() + (timeZoneDiff * -1);
+    gameStart.setHours(gameHours);
 
     const minuteDiff = ((currentTime.getHours() * 60) + currentTime.getMinutes()) - ((gameStart.getHours() * 60) + gameStart.getMinutes());
 

@@ -14,6 +14,11 @@ var app = express();
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars')
 
+var hbs = exphbs.create({});
+hbs.handlebars.registerHelper('increment', (value, options) => (parseInt(value) + 1))
+hbs.handlebars.registerHelper('parseFixture', (value, options) => `'${value.fixtureId}', '${value.adviceOdd || ''}', '${value.suggestion || ''}'`)
+hbs.handlebars.registerHelper('locateFixture', (value, options) => `${value.country} (${value.league})`)
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

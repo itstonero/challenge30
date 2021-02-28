@@ -80,7 +80,7 @@ const GetGameTime = (gameTime) => {
 
 const ShowSelectedFixture = (todayFixtures) => {
 
-    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: FormatTime(x.time)}));
+    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: FormatTime(x.time), raw: JSON.stringify(x)}));
     todaysFiltered.sort(sortByDate);
     return todaysFiltered;
     /**

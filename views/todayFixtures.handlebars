@@ -1,19 +1,23 @@
 <table class="table table-dark table-striped">
     <thead>
+      <th>S/N</th>
         <th>Match</th>
         <th>Start Time</th>
-        <th>Suggested</th>
-        <th>Advice Odd</th>
+        <th>Suggestion</th>
+        <th>AdviceOdd</th>
+        <th>Location</th>
         <th>Played Duration</th>
 
     </thead>
     <tbody>
         {{#each today}}
-            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="suggestFixture({{this.fixtureId}}, {{this.adviceOdd}}, '{{this.suggestion}}')">
+            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="suggestFixture({{  parseFixture this  }})">
+                <td>{{  increment @index }}</td>
                 <td>{{  this.game }}</td>
                 <td>{{  this.time }}</td>
                 <td>{{  this.suggestion }}</td>
-                <td>{{  this.adviceOdd  }}</td>
+                <td>{{  this.adviceOdd }}</td>
+                <td>{{  locateFixture this  }}</td>
                 <td>{{  this.period }}</td>
             </tr>
         {{/each}}

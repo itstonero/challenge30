@@ -152,6 +152,7 @@ const suggestFixture = (fixtureId, adviceOdd, suggestion) =>
     document.getElementById("fixtureSuggestion").value = `${suggestion}`;
 }
 
+
 const removeSlip = () =>
 {
     const fixtureId = document.getElementById("fixtureId").value;

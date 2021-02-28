@@ -86,6 +86,17 @@ router.post('/', async(req, res) =>
     }
 });
 
+router.post('/:fixtureId/remove', async(req, res)=>{
+    try 
+    {
+        await Fixture.destroy({where : { fixtureId : req.params.fixtureId }});
+        res.redirect(`/fixtures/today`)
+    } catch (error) 
+    {
+        res.json(error);
+    }   
+});
+
 module.exports = router;
 
 /**

@@ -111,4 +111,5 @@ router.post('/:slipId/clearBonus', async(req, res) => {
     res.redirect(`/slips/${req.params.slipId}`)
 });
 
+
 module.exports = router;

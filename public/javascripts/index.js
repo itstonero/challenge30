@@ -42,21 +42,12 @@ const pushSlip = () => {
     registerPushNotification(document.getElementById("fixtureId").value);
 }
 
-if(!register && 'serviceWorker' in navigator)
-{
-    console.log("Service Worker Loading...")
-    setTimeout(async() => {
-        register = await navigator.serviceWorker.register('/public/worker.js');
-    }, 1000);
-}else{
-    console.log("No Service Worker Allowed");
-    Notification.requestPermission(data => {
-        console.log(`Service Worker is ${data}`);
-        setTimeout(async() => {
-            register = await navigator.serviceWorker.register('/public/worker.js');
-        }, 1000);    
-    });
-}
+const registration = navigator.serviceWorker.register;
+const canNotify = !register && 'serviceWorker' in navigator;
+
+const startWorker = (location) => setTimeout(async() => (register = await registration(location)), 1000);
+(() => canNotify ?  startWorker('/public/worker.js') :   Notification.requestPermission(data => startWorker('/public/worker.js')))()
+
 
 
 
@@ -154,8 +145,25 @@ const insertFixtures = (canTrim) =>
     form.submit();
 }
   
-const suggestFixture = (fixtureId) =>
+const suggestFixture = (fixtureId, adviceOdd, suggestion) =>
 {
-    const matchId = document.getElementById("fixtureId");
-    matchId.value = `${fixtureId}`;
+    document.getElementById("fixtureId").value = `${fixtureId}`;
+    document.getElementById("fixtureAdvice").value = `${adviceOdd}`;
+    document.getElementById("fixtureSuggestion").value = `${suggestion}`;
+}
+
+const removeSlip = () =>
+{
+    const fixtureId = document.getElementById("fixtureId").value;
+
+    if(confirm("Want To Remove Slip ?"))
+    {
+        //fetch()
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = `/fixtures/${fixtureId}/remove`;
+        document.body.appendChild(form);
+        form.submit();
+        console.log(form)
+    }
 }

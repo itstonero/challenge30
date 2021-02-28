@@ -9,7 +9,7 @@
     </thead>
     <tbody>
         {{#each today}}
-            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="suggestFixture({{this.fixtureId}})">
+            <tr style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="suggestFixture({{this.fixtureId}}, {{this.adviceOdd}}, '{{this.suggestion}}')">
                 <td>{{  this.game }}</td>
                 <td>{{  this.time }}</td>
                 <td>{{  this.suggestion }}</td>
@@ -31,11 +31,11 @@
           <div class="modal-body">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Suggestion</span>
-                    <input type="text" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture">
+                    <input type="text" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture" id="fixtureSuggestion">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Advice</span>
-                    <input type="text" class="form-control" name="adviceOdd" aria-label="Add Advice Odd to Fixture">
+                    <input type="text" class="form-control" name="adviceOdd" aria-label="Add Advice Odd to Fixture" id="fixtureAdvice">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Game ID</span>
@@ -43,8 +43,7 @@
                 </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-tertiary" onclick="pushSlip()" data-bs-dismiss="modal">Subscribe</button>
+            <button type="button" class="btn btn-danger" onclick="removeSlip()" data-bs-dismiss="modal">Remove</button>
             <button type="submit" class="btn btn-primary" onclick="pushSlip()">Confirm</button>
           </div>
         </form>

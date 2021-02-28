@@ -38,6 +38,7 @@ const ShowTodayFixtures = (rawData) => {
     return response;
 }
 
+
 const GetGameTime = (gameTime) => {
     let currentTime = new Date(), gameStart = new Date(gameTime);
     let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);

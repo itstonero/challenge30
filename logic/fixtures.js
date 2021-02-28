@@ -42,7 +42,7 @@ const GetGameTime = (gameTime) => {
     let currentTime = new Date(), gameStart = new Date(gameTime);
     // let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);
 
-    // //    let currentTime = new Date(), gameStart = new Date((new Date(gameTime)).toLocaleString('en-NG'));
+    gameStart = new Date(gameStart.toLocaleString('en-NG'));
 
     // let gameHours = gameStart.getHours() + (timeZoneDiff * -1);
     // gameStart.setHours(gameHours);

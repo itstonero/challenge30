@@ -12,6 +12,23 @@
     return slip;
   };
   
+  const ReverseSlip = (slip) => 
+  {
+    console.log(slip)
+    slip.usedOdd = 1;
+    slip.retryIndex -= 1;
+    
+    if(slip.retryIndex < 0)
+    {
+      slip.retryIndex = 0;
+      slip.progressIndex -= 1;
+      slip.totalAmount /= slip.Quotation.growOdd;
+    }
+    
+    console.log(slip)
+    
+    return slip;
+  }
   
   const FormatSlipView = (slip) =>
   {
@@ -34,4 +51,4 @@
     })
   }
 
-  module.exports = { GrowSlip, FormatSlipView };
+  module.exports = { GrowSlip, FormatSlipView, ReverseSlip };

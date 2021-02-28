@@ -1,5 +1,5 @@
 const { Slip, Quotation } = require('../configuration/database');
-const { FormatSlipView, GrowSlip } = require('../logic/slip');
+const { FormatSlipView, GrowSlip, ReverseSlip } = require('../logic/slip');
 var router = require('express').Router();
 
 
@@ -94,6 +94,29 @@ router.post('/:slipId/grow', async(req, res) =>
   let slip = givenSlip.toJSON();
   slip.usedOdd *= oddUsed;
   slip = GrowSlip(slip);
+
+  return Slip.update({ 
+      retryIndex: slip.retryIndex,  
+      bonusAmount: slip.bonusAmount,
+      usedOdd: slip.usedOdd,
+      progressIndex: slip.progressIndex,
+      totalAmount: slip.totalAmount
+    }, { where : { id : req.params.slipId}})
+  .then(data => res.redirect(`/slips/${req.params.slipId}`))
+  .catch(err => res.status(404).json(err));
+})
+
+router.post('/:slipId/reverse', async(req, res) =>
+{
+
+  var givenSlip = await Slip.findOne({ where:{id: req.params.slipId}, include: Quotation});
+  if(!givenSlip)
+  {
+      return res.status(400).json({"message" : "No Slip Found"});
+  }
+
+  let slip = givenSlip.toJSON();
+  slip = ReverseSlip(slip);
 
   return Slip.update({ 
       retryIndex: slip.retryIndex,  

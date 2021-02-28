@@ -4,8 +4,11 @@
           <button type="submit" class="btn btn-warning m-1 p-5">Retry</button> 
         </form>
         <button type="button" class="btn btn-success m-1 p-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Grow</button>
+        <form method="POST" action="/slips/{{id}}/reverse" style="display: inline;">
+          <button type="submit" class="btn btn-secondary m-1 p-5">Reverse</button>
+        </form>
         <form method="POST" action="/slips/{{id}}/clearBonus" style="display: inline;">
-          <button type="submit" class="btn btn-secondary m-1 p-5">Clear</button>
+          <button type="submit" class="btn btn-warning m-1 p-5">Clear</button>
         </form>
   </div>
 

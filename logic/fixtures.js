@@ -7,21 +7,13 @@ const GetHeaders = () =>{
 }
 
 const FormatTime = (date) => {
-    let gameTime = (new Date(date)).toTimeString().split(' ');
-    return `${gameTime[0]} ${gameTime[1]}`
+    const nigeriaTime =  (new Date(date)).toLocaleTimeString('en-NG');
+    return nigeriaTime.replace(":00 ", " ");
+    // let gameTime = (new Date(date)).toLocaleTimeString('en-NG' /*{timezone : 'WAT'} */).split(' ');
+    // console.log(gameTime)
+    // return game
 }
 
-const totalTime = (fixture) => {
-    let time = fixture.time.split(':');
-    let totalMinutes = ((time[0] * 1) * 60) + (time[1] * 1);
-    return totalMinutes;
-}
-
-const sortByDate = (elementOne, elementTwo) =>
-{
-    let result =  totalTime(elementOne) - totalTime(elementTwo);
-    return result;
-}
 
 const ShowTodayFixtures = (rawData) => {
     const response = [];
@@ -47,11 +39,7 @@ const ShowTodayFixtures = (rawData) => {
 }
 
 const GetGameTime = (gameTime) => {
-    let currentTime = new Date(), gameStart = new Date(gameTime);
-    let timeZoneDiff = Math.round(currentTime.getTimezoneOffset() / 60);
-
-    let gameHours = gameStart.getHours() + (timeZoneDiff * -1);
-    gameStart.setHours(gameHours);
+    let currentTime = new Date(), gameStart = new Date((new Date(gameTime)).toLocaleString('en-NG'));
 
     const minuteDiff = ((currentTime.getHours() * 60) + currentTime.getMinutes()) - ((gameStart.getHours() * 60) + gameStart.getMinutes());
 
@@ -80,8 +68,8 @@ const GetGameTime = (gameTime) => {
 
 const ShowSelectedFixture = (todayFixtures) => {
 
-    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: FormatTime(x.time), raw: JSON.stringify(x)}));
-    todaysFiltered.sort(sortByDate);
+    const todaysFiltered = todayFixtures.map(x => ({...x, period: GetGameTime(x.time), time: x.time}));
+    todaysFiltered.sort((a, b) => (new Date(a.time)) - (new Date(b.time)));
     return todaysFiltered;
     /**
      * 
@@ -115,8 +103,6 @@ const ShowSelectedFixture = (todayFixtures) => {
         */
     }
     
-
-
 
 const ParseFormRequest = (request) =>
 {

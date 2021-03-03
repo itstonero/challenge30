@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var moment = require('moment-timezone');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require('express-handlebars');
@@ -18,11 +19,11 @@ var hbs = exphbs.create({});
 hbs.handlebars.registerHelper('increment', (value, options) => (parseInt(value) + 1))
 hbs.handlebars.registerHelper('parseFixture', (value, options) => `'${value.fixtureId}', '${value.adviceOdd || ''}', '${value.suggestion || ''}'`)
 hbs.handlebars.registerHelper('locateFixture', (value, options) => `${value.country} (${value.league})`)
-hbs.handlebars.registerHelper('fixtureTime', (value, options) => (new Date(value)).toLocaleTimeString('en-NG').replace(":00 ", " "))
+hbs.handlebars.registerHelper('fixtureTime', (value, options) => moment(value).tz('Africa/Lagos').format('hh:mm a'))
 hbs.handlebars.registerHelper('checkGameTime', (value, options) => {
     var gameTime = new Date(value);
     gameTime.setMinutes(gameTime.getMinutes() + 75);
-    return gameTime.toLocaleTimeString('en-NG').replace(":00 ", " ")
+    return moment(gameTime.toUTCString()).tz('Africa/Lagos').format('hh:mm a');
 })
 
 app.use(logger('dev'));

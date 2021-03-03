@@ -43,12 +43,15 @@ const pushSlip = () => {
 }
 
 const registration = navigator.serviceWorker.register;
-const canNotify = !register && 'serviceWorker' in navigator;
 
-const startWorker = (location) => setTimeout(async() => (register = await registration(location)), 1000);
-(() => canNotify ?  startWorker('/public/worker.js') :   Notification.requestPermission(data => startWorker('/public/worker.js')))()
-
-
+if(!register && 'serviceWorker' in navigator)
+{
+    console.log("Register Worker");
+    setTimeout(async() => {
+        register = await navigator.serviceWorker.register('/public/worker.js');
+        console.log(register)
+    }, 1000);
+}
 
 
 const allFixture = {};

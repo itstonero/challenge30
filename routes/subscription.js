@@ -14,20 +14,27 @@ webPush.setVapidDetails(
 router.post('/:fixtureId', async(req, res) =>
 {
     const pushSubscription = req.body;
+    let fixture = await Fixture.findOne({ where: { fixtureId : req.params.fixtureId }});
+    fixture = fixture.toJSON();
 
-    setTimeout(async () => {
-        let fixture = await Fixture.findOne({ where: { fixtureId : req.params.fixtureId }});
-        if(fixture)
-        {
-            fixture = fixture.toJSON();
+    var gameTime = new Date(fixture.time);
+    gameTime.setMinutes(gameTime.getMinutes() + 70);
+    var gT = moment(gameTime.toUTCString()).tz('Africa/Lagos');
+    var cT = moment().tz('Africa/Lagos');
 
-            var gameTime = new Date(fixture.time);
-            gameTime.setMinutes(gameTime.getMinutes() + 75);
-            
-            webPush.sendNotification(pushSubscription, JSON.stringify({ title : fixture.game, body: `To Play: ${fixture.suggestion}\nAdvice Odd: ${fixture.adviceOdd}\nCheck Game: ${moment(gameTime.toUTCString()).tz('Africa/Lagos').format('hh:mm a')}`}));
-            return res.redirect('/fixtures/today');
-        }
-    }, 2000);
+    var tDiff = gT.diff(cT);
+
+    if(tDiff >= 0)
+    {
+        setTimeout(async () => {
+            if(fixture)
+            {
+                
+                webPush.sendNotification(pushSubscription, JSON.stringify({ title : fixture.game, body: `To Play: ${fixture.suggestion}\nAdvice Odd: ${fixture.adviceOdd}\nCheck Game: ${gT.format('hh:mm a')}`}));
+                return res.redirect('/fixtures/today');
+            }
+        }, tDiff);
+    }
 });
 
 

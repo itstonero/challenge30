@@ -19,6 +19,11 @@ hbs.handlebars.registerHelper('increment', (value, options) => (parseInt(value) 
 hbs.handlebars.registerHelper('parseFixture', (value, options) => `'${value.fixtureId}', '${value.adviceOdd || ''}', '${value.suggestion || ''}'`)
 hbs.handlebars.registerHelper('locateFixture', (value, options) => `${value.country} (${value.league})`)
 hbs.handlebars.registerHelper('fixtureTime', (value, options) => (new Date(value)).toLocaleTimeString('en-NG').replace(":00 ", " "))
+hbs.handlebars.registerHelper('checkGameTime', (value, options) => {
+    var gameTime = new Date(value);
+    gameTime.setMinutes(gameTime.getMinutes() + 75);
+    return gameTime.toLocaleTimeString('en-NG').replace(":00 ", " ")
+})
 
 app.use(logger('dev'));
 app.use(express.json());

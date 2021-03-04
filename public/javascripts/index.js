@@ -46,7 +46,6 @@ const registration = navigator.serviceWorker.register;
 
 if(!register && 'serviceWorker' in navigator)
 {
-    console.log("Register Worker");
     setTimeout(async() => {
         register = await navigator.serviceWorker.register('/public/worker.js');
         console.log(register)
@@ -58,20 +57,9 @@ window.setInterval(() => window.location.reload(), (1000 * 60 * 30));
 
 const allFixture = {};
 
-const openQuotation = (id) => 
-{
-    window.location = `/quotations/${id}`;
-}
+const openQuotation = (id) => (window.location = `/quotations/${id}`)
 
-const openSlip = (id) =>
-{
-    window.location = `/slips/${id}`;
-}
-
-const finalize = (form) => 
-{
-    console.log(form)
-}
+const openSlip = (id) =>  (window.location = `/slips/${id}`)
 
 const retrySlip = (id) =>
 {
@@ -91,15 +79,11 @@ const retrySlip = (id) =>
 const withdrawBonus = (id) => {
     if(confirm("Want To Withdraw Bonus ?"))
     {
-        //fetch()
         const form = document.createElement('form');
         form.method = 'post';
         form.action = `/slips/${id}/clearBonus`;
         form.submit();
-        console.log(form)
     }
-
-    console.log(`cancelled`)
 }
 
 const addFixture = (fixture) => 
@@ -156,7 +140,6 @@ const suggestFixture = (fixtureId, adviceOdd, suggestion) =>
     document.getElementById("fixtureAdvice").value = `${adviceOdd}`;
     document.getElementById("fixtureSuggestion").value = `${suggestion}`;
 }
-
 
 const removeSlip = () =>
 {

@@ -53,6 +53,8 @@ if(!register && 'serviceWorker' in navigator)
     }, 1000);
 }
 
+window.setInterval(() => window.location.reload(), (1000 * 60 * 30));
+
 
 const allFixture = {};
 

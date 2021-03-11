@@ -9,7 +9,7 @@ function initializeHbs(exphbs)
     hbs.handlebars.registerHelper('fixtureTime', (value, options) => moment(value).tz('Africa/Lagos').format('hh:mm a'))
     hbs.handlebars.registerHelper('checkGameTime', (value, options) => {
         var gameTime = new Date(value);
-        gameTime.setMinutes(gameTime.getMinutes() + 75);
+        gameTime.setMinutes(gameTime.getMinutes() + 85);
         return moment(gameTime.toUTCString()).tz('Africa/Lagos').format('hh:mm a');
     })
     hbs.handlebars.registerHelper('currentGameTime', (value, options)=>{

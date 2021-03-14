@@ -4,7 +4,7 @@ function initializeHbs(exphbs)
 {
     var hbs = exphbs.create({});
     hbs.handlebars.registerHelper('increment', (value, options) => (parseInt(value) + 1))
-    hbs.handlebars.registerHelper('parseFixture', (value, options) => `'${value.fixtureId}', '${value.adviceOdd || ''}', '${value.suggestion || ''}'`)
+    hbs.handlebars.registerHelper('parseFixture', (value, options) => `'${value.game}', '${value.fixtureId}', '${value.adviceOdd || ''}', '${value.suggestion || ''}'`)
     hbs.handlebars.registerHelper('locateFixture', (value, options) => `${value.country} (${value.league})`)
     hbs.handlebars.registerHelper('fixtureTime', (value, options) => moment(value).tz('Africa/Lagos').format('hh:mm a'))
     hbs.handlebars.registerHelper('checkGameTime', (value, options) => {

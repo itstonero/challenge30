@@ -104,6 +104,7 @@ const addFixture = (fixture) =>
             return;
         }
 
+        document.getElementById("exampleModalLabel").innerHTML = `${selectedFixture.game}`;
         document.getElementById("fixtureId").value = `${fixID}`
         $("#exampleModal").modal("toggle")
     }
@@ -136,9 +137,10 @@ const insertFixtures = (canTrim) =>
     form.submit();
 }
   
-const suggestFixture = (fixtureId, adviceOdd, suggestion) =>
+const suggestFixture = (game, fixtureId, adviceOdd, suggestion) =>
 {
     document.getElementById("fixtureId").value = `${fixtureId}`;
+    document.getElementById("exampleModalLabel").innerHTML = `${game}`;
     document.getElementById("fixtureAdvice").value = `${adviceOdd}`;
     document.getElementById("fixtureSuggestion").value = `${suggestion}`;
 }
@@ -147,16 +149,11 @@ const removeSlip = () =>
 {
     const fixtureId = document.getElementById("fixtureId").value;
 
-    if(confirm("Want To Remove Slip ?"))
-    {
-        //fetch()
-        const form = document.createElement('form');
-        form.method = 'post';
-        form.action = `/fixtures/${fixtureId}/remove`;
-        document.body.appendChild(form);
-        form.submit();
-        console.log(form)
-    }
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = `/fixtures/${fixtureId}/remove`;
+    document.body.appendChild(form);
+    form.submit();
 }
 
 var elements = document.getElementsByClassName("suggest");

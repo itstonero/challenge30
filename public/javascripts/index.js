@@ -156,3 +156,19 @@ const removeSlip = () =>
         console.log(form)
     }
 }
+
+var elements = document.getElementsByClassName("suggestThis");
+
+var suggestThis = function(){
+    let prediction = "";
+    for(let tags of this.children)
+    {
+        prediction += tags.innerHTML.length == 0 ? " " : tags.innerHTML;
+    }
+    document.getElementById("fixtureSuggestion").value = prediction;
+    document.getElementById("gameUpdate").submit();
+};
+
+for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', suggestThis, false);
+}

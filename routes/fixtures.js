@@ -30,18 +30,6 @@ router.get('/today', async(req, res) =>
         const allFixtures = (await Fixture.findAll()).map(x => x.toJSON());
         res.render('todayFixtures', { today: ShowSelectedFixture(allFixtures)});
 
-        // var X = new Date();
-
-        // var apiCall = unirest("GET", "https://api-football-beta.p.rapidapi.com/odds");
-        // apiCall.headers(GetHeaders());
-        // apiCall.query({
-        //     "date": `${X.getFullYear()}-${`${X.getMonth() + 1}`.padStart(2, '0')}-${`${X.getDate()}`.padStart(2, "0")}`
-        // });
-
-        // apiCall.end(response => {
-        //     res.render('todayFixtures', { data: ShowSelectedFixture(response, registeredFixtures)})
-        // });
-
     } catch (error) 
     {
         console.log("An error Occured :: " + JSON.stringify(error))

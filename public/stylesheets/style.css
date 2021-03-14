@@ -1,8 +1,38 @@
+/*padding: 50px;
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      background-color: bisque;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 a {
   color: #00B7FF;
+}
+.suggestThis{
+  font-weight: 600;
+  padding: 25px 10px;
+  border-radius: 10px;
+  border-style: double;
+  cursor: pointer;
+  text-align: center;
+  width: 20%;
+}
+.suggestThisHome{
+  background-color: azure;
+  border-color: #00B7FF;
+}
+.suggestThisAway{
+  background-color:darksalmon;
+  border-color :crimson;
+}
+.suggestThisGoals{
+  background-color: beige;
+}
+
+.centerThis{
+  display: flex;
+  justify-content: space-evenly;
 }

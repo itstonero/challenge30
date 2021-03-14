@@ -99,11 +99,13 @@ const addFixture = (fixture) =>
         console.log(selectedFixture);
         allFixture[fixID] = selectedFixture;
 
-        if(!input.checked && allFixture.hasOwnProperty(fixID))
-        {
-            delete allFixture.fixID;
+        if(!input.checked && allFixture.hasOwnProperty(fixID)){
+            delete allFixture.fixID
+            return;
         }
 
+        document.getElementById("fixtureId").value = `${fixID}`
+        $("#exampleModal").modal("toggle")
     }
 }
 
@@ -157,18 +159,40 @@ const removeSlip = () =>
     }
 }
 
-var elements = document.getElementsByClassName("suggestThis");
+var elements = document.getElementsByClassName("suggest");
+var elemental = document.getElementsByClassName("fixSuggest");
+
+var suggestAnother = function(){
+    let fixtureId = document.getElementById("fixtureId").value;
+
+    const fixture = allFixture[fixtureId]
+    if(fixture){
+        let prediction = "";
+        for(let tags of this.children){
+            prediction += (tags.innerHTML.length == 0) ? " " : tags.innerHTML;
+        }
+        fixture["suggestion"] = prediction;
+    }
+    $("#exampleModal").modal("toggle")
+}
 
 var suggestThis = function(){
     let prediction = "";
-    for(let tags of this.children)
-    {
-        prediction += tags.innerHTML.length == 0 ? " " : tags.innerHTML;
+    for(let tags of this.children){
+        prediction += (tags.innerHTML.length == 0) ? " " : tags.innerHTML;
     }
     document.getElementById("fixtureSuggestion").value = prediction;
     document.getElementById("gameUpdate").submit();
 };
 
-for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', suggestThis, false);
+for (let element of elements) {
+    element.addEventListener('click', suggestThis, false);
+}
+
+for(let element of elemental){
+    element.addEventListener('click', suggestAnother, false);
+}
+
+var showModal = function(){
+    $("#exampleModal").modal("toggle")
 }

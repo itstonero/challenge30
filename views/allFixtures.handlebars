@@ -30,3 +30,43 @@
     </tbody>
 </table>
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Suggestion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form method="POST" id="gameUpdate" action="/fixtures/today">
+          <div class="modal-body">
+            <div class="centerThis">
+              <div class="suggestThis suggestThisHome fixSuggest"><span>Home</span><br/><span>DNB</span></div>
+              <div class="suggestThis suggestThisHome fixSuggest"><span>Home</span><br/><span>Wins</span></div>
+              <div class="suggestThis suggestThisHome fixSuggest"><span>Home</span><br/><span>-1.5 AH</span></div>
+              <div class="suggestThis suggestThisHome fixSuggest"><span>Home</span><br/><span>-2.5 AH</span></div>
+            </div>
+            <hr/>
+            <div class="centerThis">
+              <div class="suggestThis suggestThisGoals fixSuggest"><span>Goals</span><br/><span>Ov. 2.5</span></div>
+              <div class="suggestThis suggestThisGoals fixSuggest"><span>Goals</span><br/><span>Ov. 3.5</span></div>
+            </div>
+            <hr/>
+            <div class="centerThis">
+              <div class="suggestThis suggestThisAway fixSuggest"><span>Away</span><br/><span>DNB</span></div>
+              <div class="suggestThis suggestThisAway fixSuggest"><span>Away</span><br/><span>Wins</span></div>
+              <div class="suggestThis suggestThisAway fixSuggest"><span>Away</span><br/><span>-1.5 AH</span></div>
+              <div class="suggestThis suggestThisAway fixSuggest"><span>Away</span><br/><span>-2.5 AH</span></div>
+            </div>
+            <input type="hidden" class="form-control" name="suggestion" aria-label="Add Suggestion to Fixture" id="fixtureSuggestion">
+            <input type="hidden" class="form-control" name="fixtureId" aria-label="Fixture" id="fixtureId">
+            <input type="hidden" class="form-control" name="adviceOdd" aria-label="Add Advice Odd to Fixture" id="fixtureAdvice">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="removeSlip()" data-bs-dismiss="modal">Remove Game</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+

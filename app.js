@@ -7,7 +7,7 @@ var usersRouter = require('./routes/users');
 var quotationRouter = require('./routes/quotations')
 var slipRouter = require('./routes/slip')
 var subscriptionRouter = require('./routes/subscription')
-var fixtureRouter = require('./routes/fixtures')
+var fixtureRouter = require('./routes/fixtures');
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);

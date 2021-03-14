@@ -20,15 +20,17 @@ router.get('/:slipId', async(req, res) =>
 
 router.post('/', async(req, res) =>
 {
-    return Slip.create({
-    quotationId: req.body.quotationId,
-    progressIndex: 0,
-    totalAmount: req.body.totalAmount,
-    retryIndex: 0,
-    bonusAmount: 0,
-    usedOdd: 1
-  })
-  .then(data => res.redirect(`/slips/${data.id}`))
+    const newSlip = {
+      quotationId: req.body.quotationId,
+      progressIndex: 0,
+      totalAmount: req.body.totalAmount,
+      retryIndex: 0,
+      bonusAmount: 0,
+      usedOdd: 1
+    };
+    
+    console.log(newSlip)
+    return Slip.create(newSlip).then(data => res.redirect(`/slips/${data.id}`))
   .catch(err => res.status(404).json(err));
 
 //   Quotation.findByPk(quotationId).then(data => res.json(data))

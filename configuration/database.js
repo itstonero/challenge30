@@ -98,8 +98,7 @@ Fixture.init({
     }
 }, {  sequelize });
 
-Quotation.hasMany(Slip, { foreignKey : "quotationId" });
+//Quotation.hasMany(Slip, { foreignKey : "quotationId" });
 Slip.belongsTo(Quotation, { foreignKey: 'quotationId'});
-
 
 module.exports = { Quotation, Slip, Fixture, Sequelizer : sequelize }

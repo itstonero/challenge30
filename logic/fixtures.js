@@ -26,7 +26,7 @@ const ShowTodayFixtures = (rawData) => {
     for(var fixture of rawData.body.response)
     {
         const newFixture = {
-            game: `${fixture.teams.home.name} vs ${fixture.teams.away.name}`,
+            game: `${fixture.teams.home.name.replace("'", "")} vs ${fixture.teams.away.name.replace("'", "")}`,
             league: fixture.league.name,
             country: fixture.league.country,
             time: fixture.fixture.date,

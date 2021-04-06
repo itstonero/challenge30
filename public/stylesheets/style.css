@@ -3,9 +3,9 @@ font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
 
 body {
       background-color: bisque;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
 }
 
 a {
@@ -35,4 +35,48 @@ a {
 .centerThis{
   display: flex;
   justify-content: space-evenly;
+}
+
+.fixtureCard{
+  background-color: aqua;
+  padding: 30px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.fixtureCard:hover{
+  background-color: #00B7FF;
+}
+
+.fixtureCardTime{
+  position:absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.fixtureCardClose{
+  position:absolute;
+  color: red;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+.fixtureCardAway, .fixtureCardHome, .fixtureCardPlace{
+  align-self: center;
+  margin: 15px;
+}
+
+.fixtureCardHome{
+  align-self: flex-start;
+  margin: 15px;
+}
+
+.fixtureCardAway{
+  align-self: flex-end;
+  margin: 15px;
 }
